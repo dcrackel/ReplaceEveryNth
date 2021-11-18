@@ -38,7 +38,7 @@ public class ReplaceEveryNthFunctional {
         // "V", "der s", "id: No, I ", "m your f", "ther!"
         List<String> segments = splitBy(text, oldValue);
         // "a", "o", "a", "o", ...
-        List<String> separators = generateEveryNthSequence(n, newValue.toString(), oldValue.toString(), segments.size() * 2);
+        List<String> separators = generateEveryNthSequence(n, newValue.toString(), oldValue.toString(), segments.size());
 
         // "V", "a", "der s", "o", "id: No, I ", "a", "m your f", "o", "ther!", "a"
         Stream<String> alternatingItems = alternateValues(segments.stream(), separators);
@@ -46,6 +46,15 @@ public class ReplaceEveryNthFunctional {
         Stream<String> alternatingItemsTrimmed = alternatingItems.limit(segments.size() * 2 - 1);
         // "Vader soid: No, I am your fother!"
         return alternatingItemsTrimmed.collect(Collectors.joining());
+    }
+
+
+    public static String replaceNthReduced(String text, Integer n, Character oldValue, Character newValue){
+        List<String> segments = splitBy(text, oldValue);
+        List<String> separators = generateEveryNthSequence(n, newValue.toString(), oldValue.toString(), segments.size());
+        return alternateValues(segments.stream(), separators)
+                .limit(segments.size() * 2 - 1)
+                .collect(Collectors.joining());
     }
 
 }

@@ -30,5 +30,12 @@ public class ReplaceEveryNthTestsFunctional {
         assertEquals(result, "Vader soid: No, I am your fother!");
     }
 
+    @Test
+    public void replaceEveryNthReduced() {
+        String input1 = "Vader said: No, I am your father!";
+        String result = subject.replaceNthReduced(input1, 2, 'a', 'o');
+        assertEquals(result, "Vader soid: No, I am your fother!");
+    }
+
 
 }
